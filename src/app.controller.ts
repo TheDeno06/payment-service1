@@ -19,12 +19,10 @@ export class AppController implements OnModuleInit {
     this.appService.make_payment(data);
   }
 
-  @EventPattern('payment_validation')
+  @EventPattern('payment_validated')
   handleValidated(data: any) {
     this.appService.validateMsg(data);
   }
-
-  payment_validation;
 
   onModuleInit() {
     this.rulesClient.subscribeToResponseOf('payment_request');

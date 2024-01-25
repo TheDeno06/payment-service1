@@ -2,10 +2,12 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { MakePaymentEvent } from './make-payment.event';
 import { PaymentValidateEvent } from './payment-validate.event';
+import { ServiceChooser } from './services/service-chooser';
 
 @Injectable()
 export class AppService {
   constructor(
+    private readonly serviceChooser: ServiceChooser,
     @Inject('RULES_SERVICE') private readonly rulesClient: ClientKafka,
   ) {}
   getHello(): string {
@@ -22,7 +24,9 @@ export class AppService {
     );
   }
 
-  validateMsg(validatedMessage: string) {
+  validateMsg(validatedMessage: {}) {
+    console.log('validation message received: ');
     console.log(validatedMessage);
+    this.serviceChooser.chooseService('VISA');
   }
 }
