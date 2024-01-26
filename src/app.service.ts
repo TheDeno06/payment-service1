@@ -24,9 +24,9 @@ export class AppService {
     );
   }
 
-  validateMsg(validatedMessage: {}) {
+  validateMsg(validatedMessage: {}, method: string) {
     console.log('validation message received: ');
     console.log(validatedMessage);
-    this.serviceChooser.chooseService('VISA');
+    this.serviceChooser.chooseService(method);
   }
 }

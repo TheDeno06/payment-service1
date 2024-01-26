@@ -19,9 +19,14 @@ export class AppController implements OnModuleInit {
     this.appService.make_payment(data);
   }
 
-  @EventPattern('payment_validated')
-  handleValidated(data: any) {
-    this.appService.validateMsg(data);
+  @EventPattern('visa_payment_validated')
+  handleVisaValidated(data: any) {
+    this.appService.validateMsg(data, 'VISA');
+  }
+
+  @EventPattern('mastercard_payment_validated')
+  handleMasterCardValidated(data: any) {
+    this.appService.validateMsg(data, 'MASTERCARD');
   }
 
   onModuleInit() {
