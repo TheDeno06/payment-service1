@@ -5,7 +5,7 @@ import { PaymentValidateEvent } from './payment-validate.event';
 import { ServiceChooser } from './services/service-chooser';
 
 @Injectable()
-export class AppService {
+export class PaymentService {
   constructor(
     private readonly serviceChooser: ServiceChooser,
     @Inject('RULES_SERVICE') private readonly rulesClient: ClientKafka,

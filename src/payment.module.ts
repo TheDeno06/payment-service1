@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { PaymentController } from './payment.controller';
+import { PaymentService } from './payment.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ServiceChooser } from './services/service-chooser';
 
@@ -22,7 +22,7 @@ import { ServiceChooser } from './services/service-chooser';
       },
     ]),
   ],
-  controllers: [AppController],
-  providers: [AppService, ServiceChooser],
+  controllers: [PaymentController],
+  providers: [PaymentService, ServiceChooser],
 })
-export class AppModule {}
+export class PaymentModule {}

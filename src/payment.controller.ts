@@ -1,32 +1,32 @@
 import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';
-import { AppService } from './app.service';
+import { PaymentService } from './payment.service';
 import { ClientKafka, EventPattern } from '@nestjs/microservices';
 
 @Controller()
-export class AppController implements OnModuleInit {
+export class PaymentController implements OnModuleInit {
   constructor(
-    private readonly appService: AppService,
+    private readonly paymentService: PaymentService,
     @Inject('RULES_SERVICE') private readonly rulesClient: ClientKafka,
   ) {}
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    return this.paymentService.getHello();
   }
 
   @EventPattern('payment_request')
   makePaymentC(data: any) {
-    this.appService.make_payment(data);
+    this.paymentService.make_payment(data);
   }
 
   @EventPattern('visa_payment_validated')
   handleVisaValidated(data: any) {
-    this.appService.validateMsg(data, 'VISA');
+    this.paymentService.validateMsg(data, 'VISA');
   }
 
   @EventPattern('mastercard_payment_validated')
   handleMasterCardValidated(data: any) {
-    this.appService.validateMsg(data, 'MASTERCARD');
+    this.paymentService.validateMsg(data, 'MASTERCARD');
   }
 
   onModuleInit() {
